@@ -105,3 +105,6 @@ dist
 
 # jshint
 .jshintrc
+
+#package-lock
+package-lock.json
