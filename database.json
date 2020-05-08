@@ -1,0 +1,11 @@
+{
+	"dev": {
+		"ENV": "ROADRY_DEV_DATABASE_URL"
+	},
+	"test": {
+		"ENV": "ROADRY_TEST_DATABASE_URL"
+	},
+	"prod": {
+		"ENV": "ROADRY_PROD_DATABASE_URL"
+	}
+}
