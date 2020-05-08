@@ -13,9 +13,8 @@
     "test": "__tests__"
   },
   "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:cover": "jest --coverage",
+    "test": "nyc mocha --require @babel/register './__tests__/**test.js'",
+    "test:watch": "mocha --watch",
     "lint": "eslint \"src/**/*.js\"",
     "start": "parcel ./src/index.html"
   },
@@ -32,15 +31,19 @@
     "url": "https://github.com/BuildForSDG/js-starter/issues"
   },
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "jshint": "^2.11.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.5",
-    "babel-jest": "^25.4.0",
+    "@babel/register": "^7.9.0",
+    "chai": "^4.2.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2",
-    "jest": "^25.4.0",
+    "mocha": "^7.1.2",
+    "nyc": "^15.0.1",
     "parcel-bundler": "^1.12.4"
   },
   "browserslist": [

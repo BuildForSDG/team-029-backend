@@ -1,13 +1,15 @@
+import { expect } from 'chai';
+import assert from 'assert';
 import app from '../src/index';
 
 describe('app module', () => {
-  test('it exists', async () => {
-    expect(app).toBeDefined();
+  it('it exists', async () => {
+    assert(app, true);
   });
 
-  test('it returns program name with SDGs', async () => {
+  it('it returns program name with SDGs', async () => {
     const result = await app();
     const sdgPos = (result || '').indexOf('SDG');
-    expect(sdgPos).toBeGreaterThanOrEqual(0);
+    expect(sdgPos).to.be.at.least(0);
   });
 });
