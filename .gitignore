@@ -106,5 +106,10 @@ dist
 # jshint
 .jshintrc
 
+<<<<<<< HEAD
 # package-lock
 .package-lock.json
+=======
+#package-lock
+package-lock.json
+>>>>>>> 9035984fa79ad01e352dcaa066caa2dad83c94ed
