@@ -33,6 +33,7 @@
   "license": "MIT",
   "dependencies": {
     "jshint": "^2.11.0"
+    "db-migrate-pg": "^0.5.1"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
