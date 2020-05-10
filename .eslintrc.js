@@ -8,6 +8,7 @@ module.exports = {
   extends: ['airbnb-base'],
   globals: {
     Atomics: 'readonly',
+    "logger": "readonly",
     SharedArrayBuffer: 'readonly'
   },
   parserOptions: {
