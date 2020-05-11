@@ -171,7 +171,7 @@ class UserService {
     try {
       const { token } = data;
       const confirmationResult = await this.confirmUserPasswordToken(token);
-      if (!confirmationResult.success) { throw new PasswordResetError(confirmationResult.message); }
+      if (!confirmationResult.success) { throw new PasswordResetError('Token is invalid'); }
       const { id } = confirmationResult.data;
       data.userId = id;
       await User.updatePassword(data);

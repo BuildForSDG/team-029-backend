@@ -213,7 +213,8 @@ class AuthController {
 
       const { token } = req.query;
       // Find user
-      await UserService.confirmUserPasswordToken(token);
+      const confirmationResult = await UserService.confirmUserPasswordToken(token);
+      if (!confirmationResult.success) { throw new PasswordResetError('Token is invalid'); }
 
       return res.status(200).json({
         current_url: req.originalUrl,

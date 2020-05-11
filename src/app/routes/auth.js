@@ -26,4 +26,9 @@ Router.patch(
   AuthController.changePassword
 );
 
+Router.get(
+  '/confirm-password',
+  AuthController.confirmPasswordToken
+);
+
 export default Router;
