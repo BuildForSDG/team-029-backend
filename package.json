@@ -18,7 +18,8 @@
     "test": "nyc mocha --require @babel/register './__tests__/**/**spec.js'",
     "test:watch": "mocha --watch",
     "lint": "eslint \"src/**/*.js\"",
-    "start": "nodemon --exec node_modules/@babel/node/bin/babel-node.js index.js"
+    "start:dev": "nodemon --exec node_modules/@babel/node/bin/babel-node.js index.js",
+    "start": "babel ./ --out-dir dist --ignore node_modules,babel.config.js,.github,jest.config.js && node dist/index.js"
   },
   "author": {
     "name": "Build For SDG",
