@@ -5,44 +5,63 @@ Good health and well-being is one of Sustainable Development Goals(SDG) challeng
 
 
 ## Why
-
 This aims to ensure health and well-being for all, at every stage of life. While there has been significant improvement in global health in the last two decades, further progress is needed. Over the last 15 years, the number of childhood deaths has been cut in half. This proves that it is possible to win the fight against almost every disease. Still, we are spending an astonishing amount of money and resources on treating illnesses that are surprisingly easy to prevent. The new goal for worldwide Good Health promotes healthy lifestyles, preventive measures and modern, efficient healthcare for everyone.
 
 ## Usage
- How would someone use what you have built, include URLs to the deployed app, service e.t.c when you have it setup
+<br/><b> Heroku: </b> https://roadry.herokuapp.com/
+<br/><b> API documentation: </b> https://example.app/doc
 
+# Setup
 
-## Setup
+## Prerequisites
 
-Install `npm` or `yarn` if you dont have any of them already installed. We recommend Yarn though.
+Ensure you have the following installed on your local machine:
 
-After clonning the repo to your local machine and moving into the cloned folder, Run `yarn install` to get started by installing dependencies. 
+- [NodeJS](https://nodejs.org/en/download/)
+- [PostgreSQL](https://www.postgresql.org/download/)
 
-`src/index.js` is the entry to the project and source code should go into the `src` folder.
+## Installation
 
-All tests should be written in the `__tests__' folder. There's a sample in there.
+1. Clone this repository into your local machine:
+```
+git clone https://github.com/BuildForSDG/team-029-backend.git
+```
+2. Navigate into the cloned repository in your machine:
+```
+cd team-029-backend
+```
+3. Install all dependencies by running.
+```
+npm install
+```
+4. Create a `database` by running
+ ```bash
+    createdb -h localhost -p 5432 -U postgres dev_db_name
+  ```
+  `Replace dev_db_name with the name of development database`
 
-This starter uses [Parcel](https://parceljs.org/getting_started.html) as the bundler. It is much simpler that WebPack and the others
+5. Create a `.env file` in the root directory and setup your database credentials and token/secret key. Check `.env.example` for instruction.
 
-#### Hints
+6. Start the application by running
+```
+npm run start
+```
+7. Install `postman` to test all endpoints
 
-- Run `npm install` or `yarn install` to get started. We'll assume you are using Yarn.
-- Install additional dependencies: `yarn add <dependency-name> [-D]`
-- Run tests: `yarn test`
-- Run tests with test coverage info: `yarn test:cover`
-- Check the codebase for proper syntax and formatting compliance: `yarn lint`
-- Run your app in local dev mode: `yarn start`. This puts the bundled app in a `dist` folder, set up a local web server at localhost:1234, and continues to watch for your code changes which it syncs with the local server. This means if you loaded the app in a browser, it will auto-refresh as you code along. Feel free to use whatever bundler best meets your needs. Parcel was only added as a sample and for those looking for a simple but effective solution to the hassle of bundlers. 
+## Testing
+
+1. Create a `database` by running
+
+  ```bash
+    createdb -h localhost -p 5432 -U postgres test_db_name
+  ```
+  `Replace test_db_name with the name of test database`
+
+2. - run test using `npm run test` 
 
 ## Authors
 
 List the team behind this project. Their names linked to their Github, LinkedIn, or Twitter accounts should siffice. Ok to signify the role they play in the project, including the TTL and mentor
-
-## Contributing
-If this project sounds interesting to you and you'd like to contribute, thank you!
-First, you can send a mail to buildforsdg@andela.com to indicate your interest, why you'd like to support and what forms of support you can bring to the table, but here are areas we think we'd need the most help in this project :
-1.  area one (e.g this app is about human trafficking and you need feedback on your roadmap and feature list from the private sector / NGOs)
-2.  area two (e.g you want people to opt-in and try using your staging app at staging.project-name.com and report any bugs via a form)
-3.  area three (e.g here is the zoom link to our end-of sprint webinar, join and provide feedback as a stakeholder if you can)
 
 ## Acknowledgements
 
