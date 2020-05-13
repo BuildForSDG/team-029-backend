@@ -57,7 +57,7 @@ npm run start
   ```
   `Replace test_db_name with the name of test database`
 
-2. - run test using `npm run test` 
+2. run test using `npm run test` 
 
 ## Authors
 
