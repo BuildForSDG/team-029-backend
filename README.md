@@ -1,23 +1,12 @@
-barebones setup for JavaScript / Node projects replace this with a one-liner phrase describing this project or app
-
 [![Codacy Badge](https://img.shields.io/badge/Code%20Quality-D-red)](https://img.shields.io/badge/Code%20Quality-D-red)
 
+# Good health and well-being
+Good health and well-being is one of Sustainable Development Goals(SDG) challenges. The aims of this application is to provide solutions that can help avoid, alert, inform, monitor and report road injuries and deaths.
 
-## About
-
-What is this project about. Ok to enrich here or the section above it with an image. 
-
-Once this repo has been setup on Codacy by the TTL, replace the above badge with the actual one from the Codacy dashboard, and add the code coverage badge as well. This is mandatory
-
-This is a simple JavaScript starter repo template for setting up your project. The setup contains
-
-- Jest: For runnung tests. We strongly recommend that JavaScript projects use Jest
-
-- Eslint & Prettier: For formatting code to match ESlint AirBnB coding standard. You might need to install the ESlint and Prettier plugins for your code editor to make the most of these utilities
 
 ## Why
 
-Talk about what problem this solves, what SDG(s) and SGD targets it addresses and why these are imoirtant
+This aims to ensure health and well-being for all, at every stage of life. While there has been significant improvement in global health in the last two decades, further progress is needed. Over the last 15 years, the number of childhood deaths has been cut in half. This proves that it is possible to win the fight against almost every disease. Still, we are spending an astonishing amount of money and resources on treating illnesses that are surprisingly easy to prevent. The new goal for worldwide Good Health promotes healthy lifestyles, preventive measures and modern, efficient healthcare for everyone.
 
 ## Usage
  How would someone use what you have built, include URLs to the deployed app, service e.t.c when you have it setup
