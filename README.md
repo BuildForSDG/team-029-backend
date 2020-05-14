@@ -4,12 +4,12 @@
 Good health and well-being is one of Sustainable Development Goals(SDG) challenges. The aims of this application is to provide solutions that can help avoid, alert, inform, monitor and report road injuries and deaths.
 
 
-## Why
+# Why
 This aims to ensure health and well-being for all, at every stage of life. While there has been significant improvement in global health in the last two decades, further progress is needed. Over the last 15 years, the number of childhood deaths has been cut in half. This proves that it is possible to win the fight against almost every disease. Still, we are spending an astonishing amount of money and resources on treating illnesses that are surprisingly easy to prevent. The new goal for worldwide Good Health promotes healthy lifestyles, preventive measures and modern, efficient healthcare for everyone.
 
-## Usage
-<br/><b> Heroku: </b> https://roadry.herokuapp.com/
-<br/><b> API documentation: </b> https://example.app/doc
+# Usage
+<b> Heroku: </b> https://roadry.herokuapp.com/
+<b> API documentation: </b> https://example.app/doc
 
 # Setup
 
@@ -46,7 +46,7 @@ npm install
 ```
 npm run start
 ```
-7. Install `postman` to test all endpoints
+7. Install and use `postman` to test all endpoints
 
 ## Testing
 
@@ -57,19 +57,16 @@ npm run start
   ```
   `Replace test_db_name with the name of test database`
 
-2. run test using `npm run test` 
+2. Run test using `npm run test` 
 
 ## Authors
-
+- [Kelechi Oliver](https://github.com/Oliver-ke)
+- [Sikiru Moshood](https://github.com/sikiru-moshood)
+- [Alimi Kehinde M](https://github.com/marusoft)
+- [Nnaemeka Augustine Okpallannuozo](https://github.com/MekkyMayata)
+- Sadranyi
+- Femi Akinsiku
 List the team behind this project. Their names linked to their Github, LinkedIn, or Twitter accounts should siffice. Ok to signify the role they play in the project, including the TTL and mentor
-
-## Acknowledgements
-
-Did you use someone else’s code?
-Do you want to thank someone explicitly?
-Did someone’s blog post spark off a wonderful idea or give you a solution to nagging problem?
-
-It's powerful to always give credit.
 
 ## LICENSE
 MIT
