@@ -82,8 +82,8 @@ npm run start
 
 | URI                              | HTTP Method | Description       |
 | -------------------------------- | ----------- | ----------------- |
-| <code>/api/v1/auth/register</code> | `POST`    | Create an account |
-| <code>/api/v1/auth/login</code> | `POST`       | Log-in to account |
+| <code>/api/v1/auth/register</code> | `POST`    | Registers a new user |
+| <code>/api/v1/auth/login</code> | `POST`       | Logs in a user |
 
 #### API Routes
 
