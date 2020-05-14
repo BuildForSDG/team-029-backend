@@ -11,6 +11,23 @@ This aims to ensure health and well-being for all, at every stage of life. While
 <b> Heroku: </b> https://roadry.herokuapp.com/
 <br/><b> API documentation: </b> https://example.app/doc
 
+## Technologies
+
+Modern JavaScript technologies were adopted in this project
+
+ES2015: Also known as ES6 or ECMASCRIPT 6, is a new and widely used version of Javascript
+that makes it compete healthily with other languages. See [here](https://en.wikipedia.org/wiki/ECMAScript) for more infromation.
+
+NodeJS: Node.js is an open-source, cross-platform JavaScript run-time environment which allows you enjoy the features of Javascript off the web browsers and implement server-side web development.
+Visit [here](https://nodejs.org/en/) for more information.
+
+ExressJS: This is the web application framework for Node.js
+Visit [here](https://expressjs.com) for more information
+
+Postgres Database: PostgreSQL is a powerful, open source object-relational database system with over 30 years of active development that has earned it a strong reputation for reliability, feature robustness, and performance.
+
+Codes are written in accordance with Airbnb JavaScript style guide, see [here](https://github.com/airbnb/javascript) for details.
+
 # Setup
 
 ## Prerequisites
@@ -59,12 +76,29 @@ npm run start
 
 2. Run test using `npm run test` 
 
+### API ENDPOINTS
+
+#### Authentication
+
+| URI                              | HTTP Method | Description       |
+| -------------------------------- | ----------- | ----------------- |
+| <code>/api/v1/auth/register</code> | `POST`    | Create an account |
+| <code>/api/v1/auth/login</code> | `POST`       | Log-in to account |
+
+#### API Routes
+
+| URI                                                     | HTTP Method | Description                               |
+| ------------------------------------------------------- | ----------- | ----------------------------------------- |
+| <code>/api/v1/users</code>                              | `GET`       | Fetch all Users                           |
+
+
 ## Authors
 - [Kelechi Oliver](https://github.com/Oliver-ke)
 - [Sikiru Moshood](https://github.com/sikiru-moshood)
 - [Alimi Kehinde M](https://github.com/marusoft)
 - [Nnaemeka Augustine Okpallannuozo](https://github.com/MekkyMayata)
-- Sadranyi
+- [Sanya Odare]()
+- [Samuel Adranyi](https://github.com/sadranyi)
 - Femi Akinsiku
 
 ## LICENSE
