@@ -18,6 +18,8 @@
 			"quantity": 1
 		}
 	},
-	"scripts": {},
+	"scripts": {
+		"postdeploy": "npm run migrate"
+	},
 	"stack": "heroku-18"
 }

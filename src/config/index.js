@@ -9,7 +9,8 @@ const defaults = {
     expiresIn: '720h' // days
   },
   paginationLimit: 50,
-  initialization_vector_length: 16
+  initialization_vector_length: 16,
+  passwordResetTokenExpiresIn: 24 // hrs
 };
 
 // Return configuration based on current environment

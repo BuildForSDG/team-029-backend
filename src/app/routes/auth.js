@@ -11,6 +11,24 @@ Router.post(
   AuthController.register
 );
 
-Router.post('/login', AuthController.login);
+Router.post(
+  '/login',
+  AuthController.login
+);
+
+Router.post(
+  '/reset-password',
+  AuthController.resetPassword
+);
+
+Router.patch(
+  '/update-password',
+  AuthController.changePassword
+);
+
+Router.get(
+  '/confirm-password',
+  AuthController.confirmPasswordToken
+);
 
 export default Router;

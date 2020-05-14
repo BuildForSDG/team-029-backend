@@ -78,6 +78,53 @@ class User {
       throw new Error('Failed to verify id');
     }
   }
+
+  /**
+   * @description Saves user's password reset token
+   * @param { Number } id - user id
+   * @param { String } token
+   */
+
+  static async saveUserResetToken(id, token) {
+    try {
+      await db.none(userQuery.saveUserPasswordToken, [token, moment(), id]);
+      return true;
+    } catch (e) {
+      logger.error(`[${moment().format('DD-MMM-YYYY, h:mm:ss')}]`, 'Error: Failed to save password reset token from saveUserResetToken method in  user.model', e);
+      throw new Error('Failed to save user password reset token');
+    }
+  }
+
+  /**
+   * @description Find user by token
+   * @param { String } token
+   */
+
+  static async findUserByToken(token) {
+    try {
+      const user = await db.oneOrNone(userQuery.findUserByToken, [token]);
+      return user;
+    } catch (e) {
+      logger.error(`[${moment().format('DD-MMM-YYYY, h:mm:ss')}]`, 'Error: Failed to find user with the provided token from findUserByToken method in  user.model', e);
+      throw new Error('Failed to find token for user');
+    }
+  }
+
+  /**
+   * @description Updates user password credentials
+   * @param { String } token
+   */
+
+  static async updatePassword(data) {
+    try {
+      const { salt, password, userId } = data;
+      await db.none(userQuery.updatePassword, [null, null, salt, password, userId]);
+      return true;
+    } catch (e) {
+      logger.error(`[${moment().format('DD-MMM-YYYY, h:mm:ss')}]`, 'Error: Failed to update user password from updatePassword method in  user.model', e);
+      throw new Error('Failed to update user password');
+    }
+  }
 }
 
 export default User;
