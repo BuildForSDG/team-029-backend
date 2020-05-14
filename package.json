@@ -15,13 +15,13 @@
   "scripts": {
     "create-admin": "node_modules/@babel/node/bin/babel-node.js src/app/scripts/create.first.admin",
     "migrate": "node_modules/db-migrate/bin/db-migrate up",
-    "test": "nyc mocha --require @babel/register './__tests__/**/**spec.js'",
+    "test": "nyc mocha --require @babel/register './__tests__/**/**.spec.js'",
     "test:watch": "mocha --watch",
     "lint": "eslint \"src/**/*.js\"",
-    "start:dev": "nodemon --exec node_modules/@babel/node/bin/babel-node.js index.js",
+    "start:dev": "nodemon --exec node_modules/@babel/node/bin/babel-node.js src/index.js",
     "start": "node build/index.js",
     "clean":"rm -rf build && mkdir build",
-    "build-babel":"babel ./ --out-dir build --ignore node_modules,babel.config.js,.github,jest.config.js",
+    "build-babel":"babel src/ --out-dir build --ignore node_modules,babel.config.js,.github,jest.config.js",
     "build": "npm run clean && npm run build-babel"
   },
   "author": {
