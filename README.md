@@ -9,7 +9,7 @@ This aims to ensure health and well-being for all, at every stage of life. While
 
 # Usage
 <b> Heroku: </b> https://roadry.herokuapp.com/
-<b> API documentation: </b> https://example.app/doc
+<br/><b> API documentation: </b> https://example.app/doc
 
 # Setup
 
@@ -66,7 +66,6 @@ npm run start
 - [Nnaemeka Augustine Okpallannuozo](https://github.com/MekkyMayata)
 - Sadranyi
 - Femi Akinsiku
-List the team behind this project. Their names linked to their Github, LinkedIn, or Twitter accounts should siffice. Ok to signify the role they play in the project, including the TTL and mentor
 
 ## LICENSE
 MIT
