@@ -187,6 +187,25 @@ class UserService {
     }
   }
 
+  /**
+   * @description Fetches user by id
+   * @param { String } id - user id
+   */
+  static async fetchUserById(id) {
+    try {
+      const user = await User.findUserById(id);
+      return {
+        success: true,
+        user
+      };
+    } catch (e) {
+      return {
+        success: false,
+        message: e.message
+      };
+    }
+  }
+
   static verifyTokenExpiry(user) {
     const { password_reset_token_date: passwordResetTokenDate } = user;
     const a = moment(passwordResetTokenDate);

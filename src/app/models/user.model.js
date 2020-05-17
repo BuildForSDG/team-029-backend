@@ -45,7 +45,8 @@ class User {
     try {
       const {
         id, first_name: firstName, last_name: lastName, email,
-        phone_number: phoneNumber, office_address: officeAddress, user_role: userRole, password, salt
+        phone_number: phoneNumber, office_address: officeAddress,
+        user_role: userRole, password, salt
       } = userData;
 
       const user = await db.oneOrNone(
@@ -123,6 +124,21 @@ class User {
     } catch (e) {
       logger.error(`[${moment().format('DD-MMM-YYYY, h:mm:ss')}]`, 'Error: Failed to update user password from updatePassword method in  user.model', e);
       throw new Error('Failed to update user password');
+    }
+  }
+
+  /**
+   * @description Fetches a user of warden role
+   * @param { String }  id - User id
+   */
+
+  static async fetchWarden(id) {
+    try {
+      const user = await db.oneOrNone(userQuery.findWardenUserById, [id]);
+      return user;
+    } catch (e) {
+      logger.error(`[${moment().format('DD-MMM-YYYY, h:mm:ss')}]`, 'Error: Failed to fetch warden from fetchWarden method in  user.model', e);
+      throw new Error('Failed to fetch warden');
     }
   }
 }

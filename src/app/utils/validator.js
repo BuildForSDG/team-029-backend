@@ -84,6 +84,53 @@ class Validator {
 
     return fields;
   }
+
+  static validateRoadCredentials(fields) {
+    const schema = Joi.object({
+      title: Joi.string().required()
+    }).options({ abortEarly: false });
+
+    const result = schema.validate(fields);
+
+    if (result.error) {
+      const error = humanizeError(result.error.details);
+      throw new PasswordResetValidationError(error);
+    }
+
+    return fields;
+  }
+
+  static validateRoadUpdateCredentials(fields) {
+    const schema = Joi.object({
+      title: Joi.string().required(),
+      road_id: Joi.number().required()
+    }).options({ abortEarly: false });
+
+    const result = schema.validate(fields);
+
+    if (result.error) {
+      const error = humanizeError(result.error.details);
+      throw new PasswordResetValidationError(error);
+    }
+
+    return fields;
+  }
+
+  static validateRoadWardenAssinmentCredentials(fields) {
+    const schema = Joi.object({
+      road_id: Joi.number().required(),
+      assignment_id: Joi.number().required()
+    }).options({ abortEarly: false });
+
+    const result = schema.validate(fields);
+
+    if (result.error) {
+      const error = humanizeError(result.error.details);
+      throw new PasswordResetValidationError(error);
+    }
+
+    return fields;
+  }
 }
 
 export default Validator;
