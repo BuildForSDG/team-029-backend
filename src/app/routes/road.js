@@ -35,7 +35,7 @@ Router.get(
 Router.get(
   '/detail/:id',
   extractUser,
-  hasAuthorization(['A']),
+  hasAuthorization(['A', 'RW']),
   GetRoadDetailsController.getRoadDetails
 );
 
