@@ -14,7 +14,7 @@ class RemoveWardenController {
   static async unassignWarden(req, res) {
     try {
       let { body } = req;
-      body = Validator.validateRoadWardenAssinmentCredentials(body);
+      body = Validator.validateRoadWardenUnassinmentCredentials(body);
       const roadResult = await RoadService.removeWardenFromRoad(body);
       if (!roadResult.success) { throw new Error(roadResult.message); }
 
