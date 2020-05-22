@@ -6,6 +6,6 @@
 		"ENV": "ROADRY_TEST_DATABASE_URL"
 	},
 	"prod": {
-		"ENV": "ROADRY_PROD_DATABASE_URL"
+		"ENV": "DATABASE_URL"
 	}
 }

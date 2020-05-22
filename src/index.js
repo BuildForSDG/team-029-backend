@@ -1,6 +1,6 @@
 import express from 'express';
 // Bootstrap express
-import expressConfig from './src/config/express';
+import expressConfig from './config/express';
 
 const port = process.env.PORT || 3023;
 
