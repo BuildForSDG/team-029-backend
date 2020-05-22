@@ -31,7 +31,6 @@ Codes are written in accordance with Airbnb JavaScript style guide, see [here](h
 # Setup
 
 ## Prerequisites
-
 Ensure you have the following installed on your local machine:
 
 - [NodeJS](https://nodejs.org/en/download/)
