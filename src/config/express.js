@@ -9,6 +9,7 @@ import authRoutes from '../app/routes/auth';
 import roadRoutes from '../app/routes/road';
 import userRoutes from '../app/routes/user';
 import wardenRoutes from '../app/routes/warden';
+import accidentRoutes from '../app/routes/accident';
 
 const logDirectory = './log';
 const checkLogDir = fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
@@ -61,6 +62,7 @@ const expressConfig = (app) => {
   app.use('/api/v1/road', roadRoutes);
   app.use('/api/v1/user', userRoutes);
   app.use('/api/v1/warden', wardenRoutes);
+  app.use('/api/v1/accident', accidentRoutes);
 
   app.use((req, res) => res.status(404).json({
     message: 'Not Found',
