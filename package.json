@@ -19,7 +19,7 @@
     "test:watch": "mocha --watch",
     "lint": "eslint \"src/**/*.js\"",
     "start:dev": "nodemon --exec node_modules/@babel/node/bin/babel-node.js src/index.js",
-    "start": "node build/index.js",
+    "start": "npm run migrate && node build/index.js",
     "clean": "rm -rf build && mkdir build",
     "build-babel": "babel src/ --out-dir build --ignore node_modules,babel.config.js,.github,jest.config.js",
     "build": "npm run clean && npm run build-babel"
