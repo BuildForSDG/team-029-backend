@@ -8,7 +8,8 @@ const test = {
   NOTIFICATION_SENDER: 'sikirumoshood@gmail.com',
   TWILIO_SID: process.env.TWILIO_SID,
   TWILIO_AUTH_TOKEN: process.env.TWILIO_AUTH_TOKEN,
-  TWILIO_PHONE_NUMBER: process.env.TWILIO_PHONE_NUMBER
+  TWILIO_PHONE_NUMBER: process.env.TWILIO_PHONE_NUMBER,
+  GOOGLE_API_KEY: process.env.GOOGLE_API_KEY
 };
 
 export default test;

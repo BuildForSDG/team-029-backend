@@ -7,6 +7,8 @@ ALTER TABLE accidents DROP COLUMN IF EXISTS longitude;
 ALTER TABLE accidents DROP COLUMN IF EXISTS latitude;
 ALTER TABLE accidents DROP COLUMN IF EXISTS address;
 ALTER TABLE accidents DROP COLUMN IF EXISTS severity;
+ALTER TABLE accidents DROP COLUMN IF EXISTS address_meta_data;
+
 
 
 

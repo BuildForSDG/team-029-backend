@@ -60,11 +60,147 @@ class Accident {
   static async saveDescription(data) {
     try {
       const { ussd_session_id: ussdSessionId, description } = data;
-      await db.oneOrNone(accidentQuery.saveDescription, [description, ussdSessionId]);
-      return true;
+      const accident = await db.oneOrNone(accidentQuery.saveDescription, [
+        description, ussdSessionId
+      ]);
+      return accident;
     } catch (e) {
       logger.error(`[${moment().format('DD-MMM-YYYY, h:mm:ss')}]`, 'Error: Failed to save latitude in saveDescription method in  accident.model', e);
       throw new Error('Failed to save accident description');
+    }
+  }
+
+  /**
+     * @description Saves accident full address
+     * @param { Object } data { address, ussd_session_id }
+  */
+
+  static async saveAddress(data) {
+    try {
+      const { ussd_session_id: ussdSessionId, accident_id: accidentId } = data;
+      const formatedAddress = data.formatted_address;
+      const jsonData = JSON.stringify(data.full_address);
+
+      if (accidentId) {
+        await db.oneOrNone(accidentQuery.saveAddressUsingAccidentId, [
+          jsonData, formatedAddress, accidentId
+        ]);
+      } else {
+        await db.oneOrNone(accidentQuery.saveAddress, [
+          jsonData, formatedAddress, ussdSessionId
+        ]);
+      }
+
+      return true;
+    } catch (e) {
+      logger.error(`[${moment().format('DD-MMM-YYYY, h:mm:ss')}]`, 'Error: Failed to save transalated accident address in  saveAddress method in  accident.model', e);
+      throw new Error('Failed to save accident address');
+    }
+  }
+
+  /**
+     * @description Saves assigned warden to accident
+     * @param { Object } data { warden_user_id, ussd_session_id }
+  */
+
+  static async attachWardenToAccident(data) {
+    try {
+      const { ussd_session_id: ussdSessionId, warden_user_id: wardenUserId, id } = data;
+      if (ussdSessionId) {
+        await db.oneOrNone(accidentQuery.attachWardenToAccident, [
+          wardenUserId, ussdSessionId
+        ]);
+      } else {
+        await db.oneOrNone(accidentQuery.attachWardenToAccidentUsingAccidentId, [
+          wardenUserId, id
+        ]);
+      }
+
+      return true;
+    } catch (e) {
+      logger.error(`[${moment().format('DD-MMM-YYYY, h:mm:ss')}]`, 'Error: Failed to save attached warden in attachWardenToAccident method in  accident.model', e);
+      throw new Error('Failed to attach warden to accident');
+    }
+  }
+
+  /**
+     * @description Saves accident data coming from web client not USSD
+     * @param { Object } data { longitude, latitude, severity, latitude, phoneNumber}
+  */
+
+  static async saveAccident(data) {
+    try {
+      const {
+        longitude, latitude, severity, phone_number: victimPhoneNumber, description
+      } = data;
+      const accident = await db.oneOrNone(accidentQuery.createAccident, [
+        longitude, latitude, severity, description, victimPhoneNumber
+      ]);
+      return accident;
+    } catch (e) {
+      logger.error(`[${moment().format('DD-MMM-YYYY, h:mm:ss')}]`, 'Error: Failed to create accident in saveAccident method in  accident.model', e);
+      throw new Error('Failed to create accident');
+    }
+  }
+
+  /**
+       * @description Fetches accidents and applies filters when necessary
+       * @param { Object } data { longitude, latitude, severity, latitude, phoneNumber}
+    */
+
+  static async getAccidents(data) {
+    try {
+      const {
+        offset, limit, warden_user_id: wardenUserId, status, severity
+      } = data;
+      let firstFilter = false;
+      let baseQuery = accidentQuery.getAccidents;
+      let countQuery = accidentQuery.getAccidentsCount;
+
+      if (wardenUserId) {
+        baseQuery += `${accidentQuery.filterByWardenUserWhere} '${wardenUserId}'`;
+        countQuery += `${accidentQuery.filterByWardenUserWhere} '${wardenUserId}'`;
+        firstFilter = true;
+      }
+
+      if (severity) {
+        if (firstFilter) {
+          baseQuery += ` AND ${accidentQuery.filterBySeverity} '${severity}'`;
+          countQuery += ` AND ${accidentQuery.filterBySeverity} '${severity}'`;
+        } else {
+          baseQuery += ` ${accidentQuery.filterBySeverityWhere} '${severity}'`;
+          countQuery += ` ${accidentQuery.filterBySeverityWhere} '${severity}'`;
+          firstFilter = true;
+        }
+      }
+
+      if (status) {
+        if (firstFilter) {
+          baseQuery += ` AND ${accidentQuery.filterByStatus} '${status}'`;
+          countQuery += ` AND ${accidentQuery.filterByStatus} '${status}'`;
+        } else {
+          baseQuery += ` ${accidentQuery.filterByStatusWhere} '${status}'`;
+          countQuery += ` ${accidentQuery.filterByStatusWhere} '${status}'`;
+          firstFilter = true;
+        }
+      }
+
+      baseQuery += accidentQuery.orderByCreatedAtDesc;
+      baseQuery += accidentQuery.offsetQuery;
+
+      const accidents = await db.any(baseQuery, [
+        offset, limit
+      ]);
+
+      const count = await db.oneOrNone(countQuery);
+
+      return {
+        accidents,
+        count
+      };
+    } catch (e) {
+      logger.error(`[${moment().format('DD-MMM-YYYY, h:mm:ss')}]`, 'Error: Failed to fetch accidents in getAccidents method in  accident.model', e);
+      throw new Error('Failed to fetch accidents');
     }
   }
 }

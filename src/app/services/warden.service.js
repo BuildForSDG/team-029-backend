@@ -1,5 +1,5 @@
+import moment from 'moment';
 import User from '../models/user.model';
-import Road from '../models/road.model';
 import RoadService from './road.service';
 
 class WardenService {
@@ -30,6 +30,39 @@ class WardenService {
       return {
         success: true,
         data
+      };
+    } catch (e) {
+      return {
+        success: false,
+        message: e.message
+      };
+    }
+  }
+
+  /**
+   * @description Determines available based on three strategies
+   * 1. Warden that is yet to attend to an accident case
+   * 2. Warden with no pending accident case
+   * 3. Warden with the least pending accident cases
+   * @returns { Object } { sucess: true, data }
+   */
+  static async determineAvailableWarden() {
+    try {
+      let warden = null;
+      // Strategy One
+      logger.info(`[${moment().format('DD-MM-YYYYY h:i:s')}] Info: ######## Warden selection strategy defaulting to [ ONE ]`);
+      warden = await User.findUnassignedWarden();
+      if (!warden) {
+        logger.info(`[${moment().format('DD-MM-YYYYY h:i:s')}] Info: ######## Attempting warden selection strategy [ TWO ]`);
+        warden = await User.findWardenWithNoPendingAccidentCases();
+        if (!warden) {
+          logger.info(`[${moment().format('DD-MM-YYYYY h:i:s')}] Info: ######## Attempting Warden selection strategy [ THREE ]`);
+          warden = await User.findWardenWithLeastPendingAccidentCases();
+        }
+      }
+      return {
+        success: true,
+        warden
       };
     } catch (e) {
       return {

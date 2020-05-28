@@ -7,12 +7,8 @@ ALTER TABLE accidents ADD COLUMN longitude NUMERIC;
 ALTER TABLE accidents ADD COLUMN latitude NUMERIC;
 ALTER TABLE accidents ADD COLUMN address TEXT;
 ALTER TABLE accidents ADD COLUMN severity VARCHAR(50);
--- MAKE ID COLUMN INTEGER AND AUTO INCREMENT
-CREATE SEQUENCE IF NOT EXISTS accidents_id_seq
-   OWNED BY accidents.id;
+ALTER TABLE accidents ADD COLUMN address_meta_data JSON;
 
-ALTER TABLE accidents ALTER COLUMN id TYPE INTEGER USING(id::INTEGER);
-ALTER TABLE accidents ALTER COLUMN id SET DEFAULT nextval('accidents_id_seq');
 
 
 

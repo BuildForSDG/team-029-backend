@@ -147,6 +147,25 @@ class Validator {
 
     return fields;
   }
+
+  static validateAccidentCredentials(fields) {
+    const schema = Joi.object({
+      longitude: Joi.number().required(),
+      latitude: Joi.number().required(),
+      severity: Joi.string().valid('low', 'moderate', 'high').required(),
+      description: Joi.string().required(),
+      phone_number: Joi.string().required()
+    }).options({ abortEarly: false });
+
+    const result = schema.validate(fields);
+
+    if (result.error) {
+      const error = humanizeError(result.error.details);
+      throw new PasswordResetValidationError(error);
+    }
+
+    return fields;
+  }
 }
 
 export default Validator;
