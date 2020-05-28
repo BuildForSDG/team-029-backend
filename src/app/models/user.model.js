@@ -141,6 +141,48 @@ class User {
       throw new Error('Failed to fetch warden');
     }
   }
+
+  /**
+   * @description Fetch warden that has not been assigned to an accident
+   */
+
+  static async findUnassignedWarden() {
+    try {
+      const user = await db.oneOrNone(userQuery.findUnassignedWarden);
+      return user;
+    } catch (e) {
+      logger.error(`[${moment().format('DD-MMM-YYYY, h:mm:ss')}]`, 'Error: Failed to fetch warden from findUnassignedWarden method in  user.model', e);
+      throw new Error('Failed to fetch unassigned warden');
+    }
+  }
+
+  /**
+   * @description Fetch warden with no pending accident cases
+   */
+
+  static async findWardenWithNoPendingAccidentCases() {
+    try {
+      const user = await db.oneOrNone(userQuery.findWardenWithNoPendingAccidentCases);
+      return user;
+    } catch (e) {
+      logger.error(`[${moment().format('DD-MMM-YYYY, h:mm:ss')}]`, 'Error: Failed to fetch warden from findWardenWithNoPendingAccidentCases method in  user.model', e);
+      throw new Error('Failed to fetch warden with no pending accident cases');
+    }
+  }
+
+  /**
+   * @description Fetch warden with  least pending accident cases
+   */
+
+  static async findWardenWithLeastPendingAccidentCases() {
+    try {
+      const user = await db.oneOrNone(userQuery.findWardenWithLeastPendingAccidentCases);
+      return user;
+    } catch (e) {
+      logger.error(`[${moment().format('DD-MMM-YYYY, h:mm:ss')}]`, 'Error: Failed to fetch warden from findWardenWithLeastPendingAccidentCases method in  user.model', e);
+      throw new Error('Failed to fetch warden with least pending accident cases');
+    }
+  }
 }
 
 export default User;

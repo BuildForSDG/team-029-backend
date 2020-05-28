@@ -67,6 +67,86 @@ const query = {
         user_role = '{RW}'
     AND
         id = $1
+  `,
+  findUnassignedWarden: `
+  SELECT 
+    users.id as warden_user_id,
+    email,
+    phone_number
+  FROM 
+    users
+  WHERE
+    user_role = '{RW}'
+  AND
+    users.id  NOT IN (
+      SELECT 
+        warden_user_id
+      FROM
+        accidents
+      WHERE
+        warden_user_id IS NOT NULL     
+    );
+  `,
+  findWardenWithNoPendingAccidentCases: `
+   SELECT 
+      warden_user_id,
+      email,
+      phone_number
+  FROM 
+    accidents
+  INNER JOIN users ON users.id = warden_user_id
+  WHERE 
+    user_role = '{RW}'
+  AND
+    accidents.status = 'pending'
+  GROUP BY(warden_user_id, email, phone_number)
+  HAVING(COUNT(warden_user_id) = 0)
+  LIMIT 1
+  `,
+
+  findWardenWithLeastPendingAccidentCases: `
+      SELECT 
+      warden_user_id,
+      phone_number,
+      email
+    FROM 
+      accidents
+    INNER JOIN users ON users.id = accidents.warden_user_id
+    WHERE 
+      user_role = '{RW}'
+    AND 
+        accidents.status = 'pending'
+    GROUP BY (warden_user_id, phone_number, email)
+    HAVING (COUNT(warden_user_id) = ( SELECT
+      MIN(pending_accidents) 
+    FROM ( SELECT 
+          warden_user_id,
+          phone_number,
+          email,
+          COUNT(warden_user_id) as pending_accidents
+      FROM 
+          accidents
+      INNER JOIN users ON users.id = accidents.warden_user_id
+      WHERE 
+          user_role = '{RW}'
+      AND 
+            accidents.status = 'pending'
+      GROUP BY (warden_user_id, phone_number, email)
+      HAVING (COUNT(warden_user_id) <= all(
+          SELECT 
+            COUNT(warden_user_id)
+          FROM 
+            accidents
+        INNER JOIN users ON users.id = accidents.warden_user_id
+        WHERE 
+            user_role = '{RW}'
+        AND 
+              accidents.status = 'pending'
+          GROUP BY(warden_user_id)
+    ))) as cases
+    LIMIT 1
+    ))
+    LIMIT 1
   `
 };
 
