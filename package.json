@@ -14,7 +14,7 @@
   },
   "scripts": {
     "create-admin": "node_modules/@babel/node/bin/babel-node.js src/app/scripts/create.first.admin",
-    "migrate": "node_modules/db-migrate/bin/db-migrate up",
+    "migrate": "node_modules/db-migrate/bin/db-migrate up -e production",
     "test": "nyc mocha --require @babel/register './__tests__/**/**.spec.js'",
     "test:watch": "mocha --watch",
     "lint": "eslint \"src/**/*.js\"",
