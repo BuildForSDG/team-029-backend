@@ -45,7 +45,7 @@ class AuthController {
       const { id: userId } = idResult;
       body.id = userId;
 
-      // Determine user role
+      // Determine user role before continuing
       const userRole = body.user_type.toLowerCase() === 'admin' ? ['A'] : ['RW'];
       body.user_role = userRole;
 

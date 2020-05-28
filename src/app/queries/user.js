@@ -57,6 +57,16 @@ const query = {
        password = $4
     WHERE 
        id = $5
+  `,
+  findWardenUserById: `
+    SELECT 
+        *
+    FROM 
+        users
+    WHERE 
+        user_role = '{RW}'
+    AND
+        id = $1
   `
 };
 
