@@ -1,9 +1,9 @@
 /* Replace with your SQL commands */
 
 CREATE TABLE IF NOT EXISTS accident_causes (
-    id VARCHAR(50) NOT NULL,
-    accident_id VARCHAR(50),
-    cause_id VARCHAR(50),
+    id SERIAL PRIMARY KEY NOT NULL, 
+    accident_id INTEGER NOT NULL,
+    cause_id INTEGER NOT NULL,
     status VARCHAR(250), 
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW()
