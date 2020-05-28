@@ -5,4 +5,4 @@ CREATE TABLE IF NOT EXISTS team_mates (
 );
 
 INSERT INTO team_mates (name)
-	VALUES ('Moshood'), ('Mekky'), ('Marusof'), ('Isah'), ('Kelechi');
+	VALUES ('Moshood'), ('Mekky'), ('Marusoft'), ('Isah'), ('Kelechi');
