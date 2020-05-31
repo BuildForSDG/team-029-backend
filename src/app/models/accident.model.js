@@ -203,6 +203,85 @@ class Accident {
       throw new Error('Failed to fetch accidents');
     }
   }
+
+  /**
+     * @description Fetches accident for a particular warden
+     * @param { Object } wardenUserId
+  */
+
+  static async getWardenAccidents(wardenUserId) {
+    try {
+      const accidents = await db.any(accidentQuery.getWardenAccident, [
+        wardenUserId
+      ]);
+
+      const count = await db.oneOrNone(accidentQuery.getAccidentsCount, [
+        wardenUserId
+      ]);
+      return {
+        accidents,
+        count
+      };
+    } catch (e) {
+      logger.error(`[${moment().format('DD-MMM-YYYY, h:mm:ss')}]`, `Error: Failed to fetch warden [ ${wardenUserId} ] accident in getWardenAccidents method in  accident.model`, e);
+      throw new Error('Failed to fetch warden accidents');
+    }
+  }
+
+  /**
+     * @description Saves a new accident cause
+     * @param { Object } data {  accident_cause }
+  */
+
+  static async saveAccidentCause(data) {
+    try {
+      const { accident_cause: accidentCause } = data;
+      const accident = await db.oneOrNone(accidentQuery.createAccidentCause, [
+        accidentCause
+      ]);
+      return accident;
+    } catch (e) {
+      logger.error(`[${moment().format('DD-MMM-YYYY, h:mm:ss')}]`, 'Error: Failed to accident cause in saveAccidentCause method in  accident.model', e);
+      throw new Error('Failed to save new accident cause');
+    }
+  }
+
+  /**
+     * @description Fetches all accident causes
+  */
+
+  static async getAccidentCauses() {
+    try {
+      const accidentCauses = await db.any(accidentQuery.getAccidentCause);
+
+      const count = await db.oneOrNone(accidentQuery.getAccidentCauseCount);
+      return {
+        accidentCauses,
+        count
+      };
+    } catch (e) {
+      logger.error(`[${moment().format('DD-MMM-YYYY, h:mm:ss')}]`, 'Error: Failed to fetch accident causes in getAccidentCauses method in  accident.model', e);
+      throw new Error('Failed to fetch accident causes');
+    }
+  }
+
+  /**
+     * @description Update accident status to attended and update cause of accident
+     * @param { Number }  accidentId
+     * @param { String } accidentCause
+     * @param { String } roadId
+  */
+
+  static async setAccidentToAttended(accidentId, accidentCause, roadId) {
+    try {
+      const accident = await db.any(accidentQuery.setAccidentStatusToAttended,
+        [accidentCause, roadId, accidentId]);
+      return accident;
+    } catch (e) {
+      logger.error(`[${moment().format('DD-MMM-YYYY, h:mm:ss')}]`, 'Error: Failed to set accident as attended setAccidentToAttended method in  accident.model', e);
+      throw new Error('Failed to set accident as attended');
+    }
+  }
 }
 
 export default Accident;
