@@ -1,68 +1,104 @@
-barebones setup for JavaScript / Node projects replace this with a one-liner phrase describing this project or app
-
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/65aa28a4cb9941e6b6b737618ac667de)](https://app.codacy.com/gh/BuildForSDG/team-029-backend?utm_source=github.com&utm_medium=referral&utm_content=BuildForSDG/team-029-backend&utm_campaign=Badge_Grade_Settings)
 [![Codacy Badge](https://img.shields.io/badge/Code%20Quality-D-red)](https://img.shields.io/badge/Code%20Quality-D-red)
 
-
-## About
-
-What is this project about. Ok to enrich here or the section above it with an image. 
-
-Once this repo has been setup on Codacy by the TTL, replace the above badge with the actual one from the Codacy dashboard, and add the code coverage badge as well. This is mandatory
-
-This is a simple JavaScript starter repo template for setting up your project. The setup contains
-
-- Jest: For runnung tests. We strongly recommend that JavaScript projects use Jest
-
-- Eslint & Prettier: For formatting code to match ESlint AirBnB coding standard. You might need to install the ESlint and Prettier plugins for your code editor to make the most of these utilities
-
-## Why
-
-Talk about what problem this solves, what SDG(s) and SGD targets it addresses and why these are imoirtant
-
-## Usage
- How would someone use what you have built, include URLs to the deployed app, service e.t.c when you have it setup
+# Good health and well-being
+Good health and well-being is one of Sustainable Development Goals(SDG) challenges. The aims of this application is to provide solutions that can help avoid, alert, inform, monitor and report road injuries and deaths.
 
 
-## Setup
+# Why
+This aims to ensure health and well-being for all, at every stage of life. While there has been significant improvement in global health in the last two decades, further progress is needed. Over the last 15 years, the number of childhood deaths has been cut in half. This proves that it is possible to win the fight against almost every disease. Still, we are spending an astonishing amount of money and resources on treating illnesses that are surprisingly easy to prevent. The new goal for worldwide Good Health promotes healthy lifestyles, preventive measures and modern, efficient healthcare for everyone.
 
-Install `npm` or `yarn` if you dont have any of them already installed. We recommend Yarn though.
+# Usage
+<b> Heroku: </b> https://roadry.herokuapp.com/
+<br/><b> API documentation: </b> https://documenter.getpostman.com/view/10001732/SztBc8Vj?version=latest
 
-After clonning the repo to your local machine and moving into the cloned folder, Run `yarn install` to get started by installing dependencies. 
+## Technologies
 
-`src/index.js` is the entry to the project and source code should go into the `src` folder.
+Modern JavaScript technologies were adopted in this project
 
-All tests should be written in the `__tests__' folder. There's a sample in there.
+ES2015: Also known as ES6 or ECMASCRIPT 6, is a new and widely used version of Javascript
+that makes it compete healthily with other languages. See [here](https://en.wikipedia.org/wiki/ECMAScript) for more infromation.
 
-This starter uses [Parcel](https://parceljs.org/getting_started.html) as the bundler. It is much simpler that WebPack and the others
+NodeJS: Node.js is an open-source, cross-platform JavaScript run-time environment which allows you enjoy the features of Javascript off the web browsers and implement server-side web development.
+Visit [here](https://nodejs.org/en/) for more information.
 
-#### Hints
+ExressJS: This is the web application framework for Node.js
+Visit [here](https://expressjs.com) for more information
 
-- Run `npm install` or `yarn install` to get started. We'll assume you are using Yarn.
-- Install additional dependencies: `yarn add <dependency-name> [-D]`
-- Run tests: `yarn test`
-- Run tests with test coverage info: `yarn test:cover`
-- Check the codebase for proper syntax and formatting compliance: `yarn lint`
-- Run your app in local dev mode: `yarn start`. This puts the bundled app in a `dist` folder, set up a local web server at localhost:1234, and continues to watch for your code changes which it syncs with the local server. This means if you loaded the app in a browser, it will auto-refresh as you code along. Feel free to use whatever bundler best meets your needs. Parcel was only added as a sample and for those looking for a simple but effective solution to the hassle of bundlers. 
+Postgres Database: PostgreSQL is a powerful, open source object-relational database system with over 30 years of active development that has earned it a strong reputation for reliability, feature robustness, and performance.
+
+Codes are written in accordance with Airbnb JavaScript style guide, see [here](https://github.com/airbnb/javascript) for details.
+
+# Setup
+
+## Prerequisites
+Ensure you have the following installed on your local machine:
+
+- [NodeJS](https://nodejs.org/en/download/)
+- [PostgreSQL](https://www.postgresql.org/download/)
+
+## Installation
+
+1. Clone this repository into your local machine:
+```
+git clone https://github.com/BuildForSDG/team-029-backend.git
+```
+2. Navigate into the cloned repository in your machine:
+```
+cd team-029-backend
+```
+3. Install all dependencies by running.
+```
+npm install
+```
+4. Create a `database` by running
+ ```bash
+    createdb -h localhost -p 5432 -U postgres dev_db_name
+  ```
+  `Replace dev_db_name with the name of development database`
+
+5. Create a `.env file` in the root directory and setup your database credentials and token/secret key. Check `.env.example` for instruction.
+
+6. Start the application by running
+```
+npm run start
+```
+7. Install and use `postman` to test all endpoints
+
+## Testing
+
+1. Create a `database` by running
+
+  ```bash
+    createdb -h localhost -p 5432 -U postgres test_db_name
+  ```
+  `Replace test_db_name with the name of test database`
+
+2. Run test using `npm run test` 
+
+### API ENDPOINTS
+
+#### Authentication
+
+| URI                              | HTTP Method | Description       |
+| -------------------------------- | ----------- | ----------------- |
+| <code>/api/v1/auth/register</code> | `POST`    | Registers a new user |
+| <code>/api/v1/auth/login</code> | `POST`       | Logs in a user |
+
+#### API Routes
+
+| URI                                                     | HTTP Method | Description                               |
+| ------------------------------------------------------- | ----------- | ----------------------------------------- |
+| <code>/api/v1/users</code>                              | `GET`       | Fetch all Users                           |
+
 
 ## Authors
-
-List the team behind this project. Their names linked to their Github, LinkedIn, or Twitter accounts should siffice. Ok to signify the role they play in the project, including the TTL and mentor
-
-## Contributing
-If this project sounds interesting to you and you'd like to contribute, thank you!
-First, you can send a mail to buildforsdg@andela.com to indicate your interest, why you'd like to support and what forms of support you can bring to the table, but here are areas we think we'd need the most help in this project :
-1.  area one (e.g this app is about human trafficking and you need feedback on your roadmap and feature list from the private sector / NGOs)
-2.  area two (e.g you want people to opt-in and try using your staging app at staging.project-name.com and report any bugs via a form)
-3.  area three (e.g here is the zoom link to our end-of sprint webinar, join and provide feedback as a stakeholder if you can)
-
-## Acknowledgements
-
-Did you use someone else’s code?
-Do you want to thank someone explicitly?
-Did someone’s blog post spark off a wonderful idea or give you a solution to nagging problem?
-
-It's powerful to always give credit.
+- [Kelechi Oliver](https://github.com/Oliver-ke)
+- [Sikiru Moshood](https://github.com/sikiru-moshood)
+- [Alimi Kehinde M](https://github.com/marusoft)
+- [Nnaemeka Augustine Okpallannuozo](https://github.com/MekkyMayata)
+- [Sanya Odare]()
+- [Samuel Adranyi](https://github.com/sadranyi)
+- Femi Akinsiku
 
 ## LICENSE
 MIT
