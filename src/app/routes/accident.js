@@ -8,6 +8,7 @@ import { extractUser, hasAuthorization } from '../controllers/auth/utils';
 import GetAccidentsController from '../controllers/accident/get.accident.controller';
 import AccidentCauseController from '../controllers/accident/accident.causes.controller';
 import CreateAccidentReport from '../controllers/warden/create.accident.report.controller';
+import AccidentTypeController from '../controllers/accident/accident.type.controller';
 
 const Router = express.Router();
 
@@ -57,6 +58,20 @@ Router.get(
   extractUser,
   hasAuthorization(['A', 'RW']),
   AccidentCauseController.getAccidentCauses
+);
+
+Router.post(
+  '/type',
+  extractUser,
+  hasAuthorization(['A', 'RW']),
+  AccidentTypeController.createAccidentType
+);
+
+Router.get(
+  '/type',
+  extractUser,
+  hasAuthorization(['A', 'RW']),
+  AccidentTypeController.getAccidentTypes
 );
 
 Router.patch(

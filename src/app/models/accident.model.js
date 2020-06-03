@@ -1,6 +1,7 @@
 import moment from 'moment';
 import db from '../utils/database';
 import accidentQuery from '../queries/accident';
+import roadQuery from '../queries/road';
 
 class Accident {
   /**
@@ -229,6 +230,49 @@ class Accident {
   }
 
   /**
+     * @description Fetches accident for a particular road
+     * @param { Object } roadId
+  */
+
+  static async getRoadAccidents(roadId) {
+    try {
+      const accidents = await db.any(roadQuery.getRoadAccidents, [
+        roadId
+      ]);
+
+      const count = await db.oneOrNone(roadQuery.getRoadAccidentsCount, [
+        roadId
+      ]);
+
+      return {
+        accidents,
+        count
+      };
+    } catch (e) {
+      logger.error(`[${moment().format('DD-MMM-YYYY, h:mm:ss')}]`, `Error: Failed to fetch road [ ${roadId} ] accidents in getRoadAccidents method in  accident.model`, e);
+      throw new Error('Failed to fetch road accidents');
+    }
+  }
+
+  /**
+     * @description Fetches a road's accident statistics
+     * @param { Object } roadId
+  */
+
+  static async getRoadAccidentStatistics(roadId) {
+    try {
+      const accidentStats = await db.oneOrNone(roadQuery.getRoadAcidentStatistics, [
+        roadId
+      ]);
+
+      return accidentStats;
+    } catch (e) {
+      logger.error(`[${moment().format('DD-MMM-YYYY, h:mm:ss')}]`, `Error: Failed to fetch road [ ${roadId} ] accidents statistics in getRoadAccidentStatistics method in  accident.model`, e);
+      throw new Error('Failed to fetch road accident statistics');
+    }
+  }
+
+  /**
      * @description Saves a new accident cause
      * @param { Object } data {  accident_cause }
   */
@@ -243,6 +287,24 @@ class Accident {
     } catch (e) {
       logger.error(`[${moment().format('DD-MMM-YYYY, h:mm:ss')}]`, 'Error: Failed to accident cause in saveAccidentCause method in  accident.model', e);
       throw new Error('Failed to save new accident cause');
+    }
+  }
+
+  /**
+     * @description Saves a new accident type
+     * @param { Object } data {  accident_type }
+  */
+
+  static async saveAccidentType(data) {
+    try {
+      const { accident_type: accidentType } = data;
+      const accident = await db.oneOrNone(accidentQuery.createAccidentType, [
+        accidentType
+      ]);
+      return accident;
+    } catch (e) {
+      logger.error(`[${moment().format('DD-MMM-YYYY, h:mm:ss')}]`, 'Error: Failed to save accident type in saveAccidentType method in  accident.model', e);
+      throw new Error('Failed to save new accident type');
     }
   }
 
@@ -266,16 +328,36 @@ class Accident {
   }
 
   /**
+      * @description Fetches all accident types
+  */
+
+  static async getAccidentTypes() {
+    try {
+      const accidentTypes = await db.any(accidentQuery.getAccidentType);
+
+      const count = await db.oneOrNone(accidentQuery.getAccidentTypeCount);
+      return {
+        accidentTypes,
+        count
+      };
+    } catch (e) {
+      logger.error(`[${moment().format('DD-MMM-YYYY, h:mm:ss')}]`, 'Error: Failed to fetch accident types in getAccidentTypes method in  accident.model', e);
+      throw new Error('Failed to fetch accident types');
+    }
+  }
+
+  /**
      * @description Update accident status to attended and update cause of accident
      * @param { Number }  accidentId
      * @param { String } accidentCause
+     * @param { String } accidentType
      * @param { String } roadId
   */
 
-  static async setAccidentToAttended(accidentId, accidentCause, roadId) {
+  static async setAccidentToAttended(accidentId, accidentCause, accidentType, roadId) {
     try {
       const accident = await db.any(accidentQuery.setAccidentStatusToAttended,
-        [accidentCause, roadId, accidentId]);
+        [accidentCause, roadId, accidentType, accidentId]);
       return accident;
     } catch (e) {
       logger.error(`[${moment().format('DD-MMM-YYYY, h:mm:ss')}]`, 'Error: Failed to set accident as attended setAccidentToAttended method in  accident.model', e);

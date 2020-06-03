@@ -81,6 +81,13 @@ const query = {
       VALUES($1)
    RETURNING *
  `,
+  createAccidentType: `
+ INSERT 
+    INTO 
+        accident_types(type)
+    VALUES($1)
+ RETURNING *
+`,
   getWardenAccident: `
     SELECT
         accidents.id AS accident_id,
@@ -90,6 +97,7 @@ const query = {
         accidents.address,
         accidents.severity,
         accidents.cause AS cause_of_accident,
+        accidents.accident_type,
         accidents.victim_phone_number,
         accidents.address_meta_data,
         accidents.created_at,
@@ -132,6 +140,7 @@ const query = {
         accidents.severity,
         accidents.status,
         accidents.cause AS cause_of_accident,
+        accidents.accident_type,
         accidents.accident_report_date,
         users.email,
         users.phone_number,
@@ -197,6 +206,21 @@ const query = {
     FROM  
         causes
   `,
+  getAccidentType: `
+    SELECT
+       *
+    FROM  
+        accident_types
+    ORDER BY 
+        created_at DESC
+  
+  `,
+  getAccidentTypeCount: `
+    SELECT
+        count(*) AS count
+    FROM  
+        accident_types
+  `,
   setAccidentStatusToAttended: `
     UPDATE
         accidents
@@ -204,14 +228,16 @@ const query = {
         status = 'attended',
         cause = $1,
         road_id = $2,
+        accident_type = $3,
         accident_report_date = NOW()
     WHERE
-        id = $3
+        id = $4
     RETURNING 
         id,
         road_id,
         description,
         cause AS cause_of_accident,
+        accident_type,
         warden_user_id,
         ussd_session_id,
         victim_phone_number,

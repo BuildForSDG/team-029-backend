@@ -182,10 +182,26 @@ class Validator {
     return fields;
   }
 
+  static validateAccidentTypeCredentials(fields) {
+    const schema = Joi.object({
+      accident_type: Joi.string().required()
+    }).options({ abortEarly: false });
+
+    const result = schema.validate(fields);
+
+    if (result.error) {
+      const error = humanizeError(result.error.details);
+      throw new PasswordResetValidationError(error);
+    }
+
+    return fields;
+  }
+
   static validateAccidentReportCredentials(fields) {
     const schema = Joi.object({
       accident_id: Joi.string().required(),
       accident_cause: Joi.string().required(),
+      accident_type: Joi.string().required(),
       road_id: Joi.string().required()
 
     }).options({ abortEarly: false });
