@@ -1,6 +1,7 @@
 import moment from 'moment';
 import User from '../models/user.model';
 import RoadService from './road.service';
+import AccidentService from './accident.service';
 
 class WardenService {
   /**
@@ -22,9 +23,18 @@ class WardenService {
       delete user.password_reset_token_date;
 
       const data = { ...user };
+
+      const wardenAccidentInfo = await AccidentService.getWardenAccidents(id);
+      if (!wardenAccidentInfo.success) { throw new Error('We are unable to fetch accident information for this warden at the moment, please try again'); }
+
       data.road_information = {
         roads: wardenRoadInfo.data.roads,
         count: wardenRoadInfo.data.count
+      };
+
+      data.accident_information = {
+        accidents: wardenAccidentInfo.accident.accidents,
+        count: wardenAccidentInfo.accident.count.count
       };
 
       return {

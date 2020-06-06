@@ -182,6 +182,185 @@ class AccidentService {
       };
     }
   }
+
+  /**
+   * @description Get warden accidents
+   * @param { Object } wardenUserId
+   * @returns { Object } { sucess, accident}
+   */
+
+  static async getWardenAccidents(wardenUserId) {
+    try {
+      const accident = await Accident.getWardenAccidents(wardenUserId);
+      return {
+        success: true,
+        accident
+      };
+    } catch (e) {
+      return {
+        success: false,
+        message: e.message
+      };
+    }
+  }
+
+  /**
+   * @description Get road accidents
+   * @param { Object } roadId
+   * @returns { Object } { sucess, accident}
+   */
+
+  static async getRoadAccidents(roadId) {
+    try {
+      const accident = await Accident.getRoadAccidents(roadId);
+      return {
+        success: true,
+        accident
+      };
+    } catch (e) {
+      return {
+        success: false,
+        message: e.message
+      };
+    }
+  }
+
+  /**
+   * @description Get road accident statistics
+   * @param { Object } roadId
+   * @returns { Object } { sucess, accidentStats}
+   */
+
+  static async getRoadAccidentStatistics(roadId) {
+    try {
+      const accidentStats = await Accident.getRoadAccidentStatistics(roadId);
+      const data = {
+        accident_statistics: {}
+      };
+
+      data.accident_statistics = accidentStats;
+
+      return {
+        success: true,
+        accident_statistics: data.accident_statistics
+      };
+    } catch (e) {
+      return {
+        success: false,
+        message: e.message
+      };
+    }
+  }
+
+  /**
+   * @description Creates accident cause
+   * @param { Object } data { accident_cause }
+   * @returns { Object } { sucess, cause}
+   */
+
+  static async createAccidentCause(data) {
+    try {
+      const accident = await Accident.saveAccidentCause(data);
+      return {
+        success: true,
+        accident
+      };
+    } catch (e) {
+      return {
+        success: false,
+        message: e.message
+      };
+    }
+  }
+
+  /**
+   * @description Creates accident type
+   * @param { Object } data { accident_type }
+   * @returns { Object } { sucess, type}
+   */
+
+  static async createAccidentType(data) {
+    try {
+      const accident = await Accident.saveAccidentType(data);
+      return {
+        success: true,
+        accident
+      };
+    } catch (e) {
+      return {
+        success: false,
+        message: e.message
+      };
+    }
+  }
+
+  /**
+   * @description Get accident causes
+   * @returns { Object } { sucess, accidentCause }
+   */
+
+  static async getAccidentCauses() {
+    try {
+      const accident = await Accident.getAccidentCauses();
+      return {
+        success: true,
+        accident
+      };
+    } catch (e) {
+      return {
+        success: false,
+        message: e.message
+      };
+    }
+  }
+
+  /**
+   * @description Get accident types
+   * @returns { Object } { sucess, accidentTypes }
+   */
+
+  static async getAccidentTypes() {
+    try {
+      const accident = await Accident.getAccidentTypes();
+      return {
+        success: true,
+        accident
+      };
+    } catch (e) {
+      return {
+        success: false,
+        message: e.message
+      };
+    }
+  }
+
+  /**
+   * @description Takes accident report
+   * @param { Object } data { accident_id, accident_cause, road_id }
+   * @returns { Object } { sucess, accident}
+   */
+
+  static async saveAccidentReport(data) {
+    try {
+      const {
+        accident_id: accidentId, accident_cause: accidentCause,
+        road_id: roadId, accident_type: accidentType
+      } = data;
+      const accident = await Accident.setAccidentToAttended(
+        accidentId, accidentCause, accidentType, roadId
+      );
+
+      return {
+        success: true,
+        accident
+      };
+    } catch (e) {
+      return {
+        success: false,
+        message: e.message
+      };
+    }
+  }
 }
 
 export default AccidentService;
